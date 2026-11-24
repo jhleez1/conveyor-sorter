@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conveyor Sorter · PLC simulator</title>
+<meta name="description" content="A colour-sorting conveyor controlled by a Structured Text PLC program, simulated in the browser.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Conveyor Sorter</h1>
+    <p class="sub">A PLC program in Structured Text, running a simulated colour-sorting line. Scan time 10 ms.</p>
+  </div>
+  <a class="gh" href="https://github.com/jhleez1/conveyor-sorter">Source on GitHub</a>
+</header>
+
+<main>
+  <section class="panel line">
+    <canvas id="belt" width="900" height="300" aria-label="Conveyor belt with a colour sensor, two pushers and three bins"></canvas>
+    <div class="counters">
+      <div><span class="dot red"></span>Red <b id="cRed">0</b></div>
+      <div><span class="dot blue"></span>Blue <b id="cBlue">0</b></div>
+      <div><span class="dot green"></span>Green <b id="cGreen">0</b></div>
+      <div>Rate <b id="cRate">0</b>/min</div>
+      <div>Encoder <b id="cEnc">0</b></div>
+      <div>Missorted <b id="cMiss">0</b></div>
+    </div>
+  </section>
+
+  <section class="panel hmi">
+    <h2>HMI</h2>
+    <div class="state"><span id="stateLamp" class="lamp"></span><span id="stateText">IDLE</span></div>
+    <div class="buttons">
+      <button id="bStart" class="b-start">Start</button>
+      <button id="bStop" class="b-stop">Stop</button>
+      <button id="bReset" class="b-reset">Reset</button>
+    </div>
+    <button id="bEstop" class="estop" aria-pressed="false"><span>E-STOP</span></button>
+    <p class="hint" id="hint">Press Start to run the line.</p>
+    <label class="slider">Belt speed <input id="speed" type="range" min="40" max="200" value="110"><output id="speedOut">110</output> mm/s</label>
+    <label class="slider">Part feed <input id="feed" type="range" min="10" max="60" value="30"><output id="feedOut">30</output> /min</label>
+  </section>
+
+  <section class="panel io">
+    <h2>I/O</h2>
+    <table id="ioTable"></table>
+    <h2>Tracking queues</h2>
+    <div class="queues"><div>Red <code id="qRed">[]</code></div><div>Blue <code id="qBlue">[]</code></div></div>
+  </section>
+
+  <section class="panel code">
+    <h2>Cyclic.st <small>(the program the PLC runs)</small></h2>
+    <pre id="src">Loading…</pre>
+  </section>
+</main>
+
+<footer>Built by Jihan Lee · <a href="https://github.com/jhleez1">github.com/jhleez1</a></footer>
+
+<script src="plc.js"></script>
+<script src="sim.js"></script>
+</body>
+</html>

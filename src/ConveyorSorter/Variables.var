@@ -1,0 +1,42 @@
+VAR CONSTANT
+	STATE_IDLE : USINT := 0;
+	STATE_RUNNING : USINT := 1;
+	STATE_FAULT : USINT := 2;
+	QUEUE_SIZE : USINT := 16;
+	RED_OFFSET : DINT := 220; (*Encoder counts from colour sensor to red pusher*)
+	BLUE_OFFSET : DINT := 360; (*Encoder counts from colour sensor to blue pusher*)
+	PUSH_TIME : TIME := T#350ms;
+END_VAR
+VAR
+	(* Digital inputs (map in the I/O configuration) *)
+	diStart : BOOL;
+	diStop : BOOL;
+	diReset : BOOL;
+	diEStop : BOOL; (*TRUE = emergency stop pressed*)
+	diPartAtSensor : BOOL;
+	diColourRed : BOOL;
+	diColourBlue : BOOL;
+	aiEncoder : DINT; (*Belt position*)
+	(* Digital outputs *)
+	doMotor : BOOL;
+	doPushRed : BOOL;
+	doPushBlue : BOOL;
+	doLampRun : BOOL;
+	doLampFault : BOOL;
+	(* Internal *)
+	State : USINT;
+	SensorEdge : R_TRIG;
+	RedPush : TON;
+	BluePush : TON;
+	RedQueue : ARRAY[0..15] OF DINT;
+	BlueQueue : ARRAY[0..15] OF DINT;
+	RedHead : USINT;
+	RedCount : USINT;
+	BlueHead : USINT;
+	BlueCount : USINT;
+	(* Counters shown on the HMI *)
+	RedParts : UDINT;
+	BlueParts : UDINT;
+	GreenParts : UDINT;
+	DroppedParts : UDINT;
+END_VAR
