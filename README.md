@@ -50,4 +50,4 @@ Add the three files under `src/ConveyorSorter` to a program in Automation Studio
 
 ---
 
-Built by [Jihan Lee](https://github.com/jhleez1), with help from Claude (AI) for the simulator and tests.
+Built by [Jihan Lee](https://github.com/jhleez1), with help from Claude (AI) for the tests.
